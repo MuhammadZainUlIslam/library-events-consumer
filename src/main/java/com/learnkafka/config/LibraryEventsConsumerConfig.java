@@ -1,6 +1,6 @@
 package com.learnkafka.config;
 
-import org.springframework.boot.kafka.autoconfigure.ConcurrentKafkaListenerContainerFactoryConfigurer;
+import org.springframework.boot.autoconfigure.kafka.ConcurrentKafkaListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -19,8 +19,8 @@ public class LibraryEventsConsumerConfig {
 
         ConcurrentKafkaListenerContainerFactory<Object, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         configurer.configure(factory, kafkaConsumerFactory);
-//        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
 
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.BATCH);
         factory.setConcurrency(3);
         return factory;
     }
