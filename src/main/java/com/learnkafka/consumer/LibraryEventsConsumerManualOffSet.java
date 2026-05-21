@@ -1,4 +1,23 @@
 package com.learnkafka.consumer;
 
-public class LibraryEventsConsumerManualOffSet {
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.jspecify.annotations.Nullable;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.listener.AcknowledgingMessageListener;
+import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.stereotype.Component;
+
+//@Component
+@Slf4j
+public class LibraryEventsConsumerManualOffSet implements AcknowledgingMessageListener<Integer, String> {
+
+    @Override
+    @KafkaListener(topics = {"library-events"})
+    public void onMessage(ConsumerRecord<Integer, String> consumerRecord, @Nullable Acknowledgment acknowledgment) {
+        log.info("Consumer record : "+consumerRecord);
+        acknowledgment.acknowledge();
+
+    }
+
 }

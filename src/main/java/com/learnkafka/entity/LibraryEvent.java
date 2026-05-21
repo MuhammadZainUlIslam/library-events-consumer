@@ -1,4 +1,28 @@
 package com.learnkafka.entity;
 
-public class libraryEvent {
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+public class LibraryEvent {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer libraryEventId;
+
+    @Enumerated(EnumType.STRING)
+    private LibraryEventType libraryEventType;
+
+    @OneToOne(mappedBy = "libraryEvent",
+    cascade = {CascadeType.ALL})
+    @ToString.Exclude
+    private Book book;
+
+
 }

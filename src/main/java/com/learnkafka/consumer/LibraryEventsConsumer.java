@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class LibraryEventsConsumer {
 
-    @KafkaListener(topics = "library-events", groupId = "library-events-group")
-    public void onMessage(String message) {
-        System.out.println(message);
+    @KafkaListener(topics = {"library-events"})
+    public void onMessage(ConsumerRecord<Integer, String> consumerRecord) {
+        log.info("Consumer record : "+consumerRecord);
     }
 
 }
