@@ -31,14 +31,20 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
 
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
-sourceSets{
+sourceSets {
 	test {
-		java.srcDirs = ['src/test/java/unit', 'src/test/java/intg']
+		java {
+			srcDirs = ['src/test/java/unit', 'src/test/java/intg']
+		}
+		resources {
+			srcDirs = ['src/test/resources']
+		}
 	}
 }
 

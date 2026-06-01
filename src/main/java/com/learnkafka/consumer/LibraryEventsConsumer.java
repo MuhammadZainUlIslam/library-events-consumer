@@ -17,7 +17,8 @@ public class LibraryEventsConsumer {
     private LibraryEventService libraryEventService;
 
 
-    @KafkaListener(topics = {"library-events"})
+    @KafkaListener(topics = {"library-events"},
+    groupId = "retry-listener-group")
     public void onMessage(ConsumerRecord<Integer, String> consumerRecord) {
         try {
             log.info("Received: {}", consumerRecord.value());
